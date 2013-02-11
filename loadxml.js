@@ -37,29 +37,29 @@ var nodes = new DocumentNodes(xmlDoc);
 var results = nodes.get('/company/turnover/year[@id=2012]',
                 javax.xml.xpath.XPathConstants.NODESET);
 
-// show a specific year
+print('\nExample (1) show a specific year\n');
 var i;
 for (i = 0; i < results.getLength(); i += 1) {
     var node = results.item(i).getFirstChild();
-    print('Year 2012 has turnover of ' + node.getTextContent());
+    print('\tYear 2012 has turnover of ' + node.getTextContent());
 }
 
-// show all years
+print('\nExample (2) show all years using expression /company/turnover\n');
 results = nodes.get('/company/turnover/*',
             javax.xml.xpath.XPathConstants.NODESET);
 for (i = 0; i < results.getLength(); i += 1) {
-    print(results.item(i).getTextContent());
+    print('\t' + results.item(i).getTextContent());
 }
 
-// show attributes and value for each year
+print('\nExample (3) show attributes and value for each year\n');
 for (i = 0; i < results.getLength(); i += 1) {
     if (results.item(i).hasAttributes()) {
-        print(results.item(i).getTextContent() + ' has attributes');
+        print('\t' + results.item(i).getTextContent() + ' has attributes');
         var attribs = results.item(i).getAttributes();
         var j;
         for (j = 0; j < attribs.getLength(); j += 1) {
             var node = attribs.item(j);
-            print('\t' + node.getNodeName() + ' = ' + node.getNodeValue());
+            print('\t\t' + node.getNodeName() + ' = ' + node.getNodeValue());
         }
     }
 }
