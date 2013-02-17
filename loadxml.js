@@ -26,6 +26,17 @@ function DocumentNodes(xmlDoc) {
     };
 }
 
+// show an objects properties
+function show(obj, objName) {
+    var result = new String;
+    for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            result += objName + '.' + i + ' = ' + obj[i] + '\n';
+        }
+    }
+    return result;
+}
+
 /**************************************
  * MAIN
  **************************************/
@@ -37,21 +48,21 @@ var nodes = new DocumentNodes(xmlDoc);
 var results = nodes.get('/company/turnover/year[@id=2012]',
                 javax.xml.xpath.XPathConstants.NODESET);
 
-print('\nExample (1) show a specific year\n');
+print('\n(1) show a specific year\n');
 var i;
 for (i = 0; i < results.getLength(); i += 1) {
     var node = results.item(i).getFirstChild();
     print('\tYear 2012 has turnover of ' + node.getTextContent());
 }
 
-print('\nExample (2) show all years using expression /company/turnover\n');
+print('\n(2) show all years using expression /company/turnover\n');
 results = nodes.get('/company/turnover/*',
             javax.xml.xpath.XPathConstants.NODESET);
 for (i = 0; i < results.getLength(); i += 1) {
     print('\t' + results.item(i).getTextContent());
 }
 
-print('\nExample (3) show attributes and value for each year\n');
+print('\n(3) show attributes and value for each year\n');
 for (i = 0; i < results.getLength(); i += 1) {
     if (results.item(i).hasAttributes()) {
         print('\t' + results.item(i).getTextContent() + ' has attributes');
@@ -63,3 +74,6 @@ for (i = 0; i < results.getLength(); i += 1) {
         }
     }
 }
+
+print('\n(4) show node object properties\n');
+print(show(nodes, 'nodes'));
