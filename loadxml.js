@@ -28,8 +28,9 @@ function DocumentNodes(xmlDoc) {
 
 // show an objects properties
 function show(obj, objName) {
-    var result = new String;
-    for (var i in obj) {
+    'use strict';
+    var result, i;
+    for (i in obj) {
         if (obj.hasOwnProperty(i)) {
             result += objName + '.' + i + ' = ' + obj[i] + '\n';
         }
