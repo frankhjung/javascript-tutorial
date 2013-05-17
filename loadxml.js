@@ -29,7 +29,7 @@ function DocumentNodes(xmlDoc) {
 // show an objects properties
 function show(obj, objName) {
     'use strict';
-    var result, i;
+    var i, result = null;
     for (i in obj) {
         if (obj.hasOwnProperty(i)) {
             result += objName + '.' + i + ' = ' + obj[i] + '\n';
@@ -38,9 +38,10 @@ function show(obj, objName) {
     return result;
 }
 
-/**************************************
- * MAIN
- **************************************/
+// *****************************************************************
+// * MAIN
+// *****************************************************************
+
 // load document
 var xmlDoc = loadXml('test.xml');
 
@@ -50,9 +51,9 @@ var results = nodes.get('/company/turnover/year[@id=2012]',
                 javax.xml.xpath.XPathConstants.NODESET);
 
 print('\n(1) show a specific year\n');
-var i;
+var i, node;
 for (i = 0; i < results.getLength(); i += 1) {
-    var node = results.item(i).getFirstChild();
+    node = results.item(i).getFirstChild();
     print('\tYear 2012 has turnover of ' + node.getTextContent());
 }
 
@@ -64,13 +65,13 @@ for (i = 0; i < results.getLength(); i += 1) {
 }
 
 print('\n(3) show attributes and value for each year\n');
+var j, attribs, node;
 for (i = 0; i < results.getLength(); i += 1) {
     if (results.item(i).hasAttributes()) {
         print('\t' + results.item(i).getTextContent() + ' has attributes');
-        var attribs = results.item(i).getAttributes();
-        var j;
+        attribs = results.item(i).getAttributes();
         for (j = 0; j < attribs.getLength(); j += 1) {
-            var node = attribs.item(j);
+            node = attribs.item(j);
             print('\t\t' + node.getNodeName() + ' = ' + node.getNodeValue());
         }
     }

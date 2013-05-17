@@ -29,12 +29,13 @@ var getDigitName = (function () {
     };
 }());
 
-/*
- * MAIN
- */
+// *****************************************************************
+// * MAIN
+// *****************************************************************
+
 print('Printing 10 random digits ...');
-var i;
+var i, randomDigit;
 for (i = 0; i < 10; i += 1) {
-    var randomDigit = getRandomDigit();
+    randomDigit = getRandomDigit();
     print('\t' + i + ') ' + randomDigit + ' is ' + getDigitName(randomDigit));
 }
