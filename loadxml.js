@@ -15,11 +15,10 @@ function loadXml(fileName) {
 // constructor
 function DocumentNodes(xmlDoc) {
     'use strict';
-    //var my = this;
     this.xmlDoc = xmlDoc;
     this.xpFactory = javax.xml.xpath.XPathFactory.newInstance();
     this.xpath = this.xpFactory.newXPath();
-    // return node set of a specific type for a given expression
+    // function to return node set of a specific type for a given expression
     this.get = function (expression, type) {
         var xpexpression = this.xpath.compile(expression);
         return xpexpression.evaluate(this.xmlDoc, type);
@@ -27,14 +26,12 @@ function DocumentNodes(xmlDoc) {
 }
 
 // show an objects properties
-function show(obj, objName) {
+function listProperties(obj) {
     'use strict';
-    var i, result = null;
-    for (i in obj) {
-        if (obj.hasOwnProperty(i)) {
-            result += objName + '.' + i + ' = ' + obj[i] + '\n';
-        }
-    }
+    var result = [];
+    Object.keys(obj).forEach(function(i) {
+        result.push(obj[i]);
+    });
     return result;
 }
 
@@ -78,4 +75,7 @@ for (i = 0; i < results.getLength(); i += 1) {
 }
 
 print('\n(4) show node object properties\n');
-print(show(nodes, 'nodes'));
+results = listProperties(nodes);
+for (i = 0; i < results.length; i += 1) {
+    print('\t' + results[i].toString());
+}
